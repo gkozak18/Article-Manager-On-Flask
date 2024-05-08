@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ user.login }}
+{% endblock %}
+
+{% block body2 %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-4">
+            <div class="row" style="width: 256px; text-align: center;">
+                {% if user.profile_picture %}
+                    <img src="{{ url_for('uploaded_file', filename=user.profile_picture) }}">
+                {% else %}
+                    <img src="static/images/base_profile_picture.jpg">
+                {% endif %}
+                <a href="{{ url_for('change_profile_picture') }}">Change a Picture</a>
+            </div>
+        </div>
+        <div class="col">
+            <h1>{{ user.name }}</h1>
+            <h4>Login: {{ user.login }}</h3>
+            <h4>Email: {{ user.email }}</h3>
+            <h4>Phone Number: {{ user.phone_number }}</h3>
+        </div>
+    </div>
+</div>
+<div class="container mb-5">
+    <div class="row">
+        {% for article in your_articles %}
+            <a href="{{ url_for('article', article_id=article.id) }}">
+                <div class="card mb-1">
+                    <div class="card-body">
+                        <h4>{{ article.title }}</h4>
+                        <p>{{ article.description }}</p>
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

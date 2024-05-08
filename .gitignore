@@ -1,0 +1,9 @@
+*.key
+*.pem
+*.crt
+secret_data.py
+uploads/
+instance/
+migrations/
+__pycache__/
+secret_data.py

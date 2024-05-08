@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Profile Picture
+{% endblock %}
+
+
+{% block body2 %}
+<div class="container m-5">
+    <div class="row">
+        <div class="col-6 mx-auto" style="text-align: center;">
+            <form method="POST" enctype="multipart/form-data">
+                <h2 class="mb-3">Choose a new Profile Picture </h2>
+                <label for="new_profile_picture" class="form-label mb-1">Picture (Image should be 256x256px)</label>
+                <div class="row">
+                    <div class="col">
+                        <input type="file" id="new_profile_picture" name="new_profile_picture" class="form-control mb-1">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3">Save a New Picture</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

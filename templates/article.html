@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+{% block body2 %}
+<div class="container mb-5 mt-5">
+    {% if article.image %}
+        <img src="{{ url_for('uploaded_file', filename=article.image) }}" class="img-fluid" alt="Article Image">
+    {% endif %}
+    <h1>{{ article.title }}</h1>
+    <h4>{{ article.description }}</h4>
+    <p>{{ article.text }}</p>
+</div>
+<div class="container mb-5 mt-5">
+    <form id="comment_form">
+        <div class="row">
+            <div class="col-auto">
+            <label for="comment_input" class="form-label">Comment:</label>
+            </div>
+            <div class="col">
+            <input type="text" id="comment_input" class="form-control" name="comment_input">
+            </div>
+            <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container mb-5 mt-5">
+    <div class="row" id="comments">
+        {% for comment in recent_comments %}
+            <div class="card">
+                <div class="card-body">
+                    <p>{{ comment.author }}</p>
+                    <h4>{{ comment.text }}</h4>
+                </div>
+            </div>
+        {% endfor %}
+        {% if not recent_comments %}
+            <p style="text-align: center">There's no comments yet. Make the first!</p>
+        {% endif %}
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('#comment_form').submit(function(event){
+                event.preventDefault();
+                var comment = $('#comment_input').val();
+                $.post('/add_comment', {
+                    comment: comment,
+                    article_id: "{{article.id}}"
+                }, function(data){
+                    $('#comments').prepend(
+                        '<div class="card"> <div class="card-body"><p>'
+                        + data.author
+                        + '</p><h4>'
+                        + data.comment
+                        + '</h4></div></div>');
+                    $('#comment_input').val('');
+                });
+            });
+        });
+    </script>
+</div>
+{% endblock %}
