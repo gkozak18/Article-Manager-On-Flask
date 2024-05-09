@@ -13,6 +13,8 @@ login_manager.init_app(app)
 login_manager.login_view = "log_in"
 
 
+# consumer_key = secret_data.consumer_key
+# consumer_secret = secret_data.consumer_secret
 # google_bp = make_google_blueprint(
 #     client_id=consumer_key,
 #     client_secret=consumer_secret,
@@ -23,12 +25,10 @@ login_manager.login_view = "log_in"
 # app.register_blueprint(google_bp, url_prefix="/login")
 
 
-# Allowed image file extensions
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
 
 def allowed_file(filename):
-    # Check if the filename extension is in the set of allowed extensions
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
