@@ -13,8 +13,6 @@ login_manager.init_app(app)
 login_manager.login_view = "log_in"
 
 
-# consumer_key = secret_data.consumer_key
-# consumer_secret = secret_data.consumer_secret
 # google_bp = make_google_blueprint(
 #     client_id=consumer_key,
 #     client_secret=consumer_secret,
